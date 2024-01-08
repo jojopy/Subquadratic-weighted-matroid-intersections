@@ -43,5 +43,8 @@ def plot(results):
         y.append(ncalls)
         x.append(n*r**(3/4)*log(r*W)*log(n))
 
+    plt.title("Time complexity of subquadratic weighted matroid intersections")
+    plt.xlabel("n*r**(3/4)*log(r*W)*log(n)")
+    plt.ylabel("Calls to rank oracle")
     plt.scatter(x,y)
     plt.show()
