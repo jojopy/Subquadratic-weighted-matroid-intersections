@@ -6,6 +6,7 @@ import cProfile
 import pstats
 from math import log
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def getDataPoint(size):
@@ -25,7 +26,7 @@ def getDataPoint(size):
 
 def getData(points):
     results = []
-    for n in range(10,10 + points):
+    for n in range(10, 10 + points):
         if(n % int(points/10) == 0):
             print("{}% done...".format((n-10)/points*100))
         ncalls, r, W = getDataPoint(n)
@@ -47,4 +48,12 @@ def plot(results):
     plt.xlabel("n*r**(3/4)*log(r*W)*log(n)")
     plt.ylabel("Calls to rank oracle")
     plt.scatter(x,y)
+
+    axes = plt.gca()
+    x_vals = np.array([0, axes.get_xlim()[-1]])
+    plt.plot(x_vals, x_vals * 0.25, '--', label='slope=0.25')
+    plt.plot(x_vals, x_vals * 0.5, '--', label='slope=0.5')
+    plt.plot(x_vals, x_vals * 0.75, '--', label='slope=0.75')
+    plt.legend()
+
     plt.show()
